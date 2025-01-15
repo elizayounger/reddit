@@ -1,0 +1,2 @@
+# reddit
+Reddit is a website where people share links to articles, media and other things on the web. This application uses React, Redux and many other technologies to mimic this. The application will allow users to view and search posts and comments provided by the API.
