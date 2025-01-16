@@ -1,0 +1,118 @@
+.post-container {
+    padding: 10px 0 10px 0;
+    background-color: #e0d7d3;
+}
+.post {
+    padding: 0.5rem;
+    border: 2px solid #c73700;
+    background-color: white;
+    border-radius: 1rem;
+    width: 90%;
+    margin: auto;
+}
+/* POST HEADER */
+.profile-pic {
+    border: 1px solid black;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+}
+.post-author {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+}
+.post-author p {
+    margin: 0;
+    display: inline;
+}
+.post p {
+    display: inline-block;
+}
+.down {
+    padding-bottom: 1px;
+
+/* CAPTION & PIC */}
+.post figure {
+    align-items: center;
+    margin: 0px 30px;
+    align-content: center;
+}
+.post h3 {
+    display: inline-block;
+    margin: 10px 0;
+    max-width: 900px;
+}
+.post img {
+    display: block;
+    margin: auto;
+    width: 100%;
+    height: auto;
+    max-width: 800px;
+    max-height: 600px;
+}
+@media screen and (max-width: 475px) {
+    .post figure {
+        margin: 10px;
+    }
+}
+/* FOOTER */
+.vote-n-comment {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    justify-content: space-between;
+}
+.vote {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+/* vote buttons */
+.vote-n-comment button {
+    display: flex;
+    align-items: center;
+    background-color: #f4f4f4;
+    border: 2px solid #ccc;
+    border-radius: 8px; 
+    padding: 5px 10px; 
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.vote-n-comment .comment-button {
+    position: relative;
+    right: 0px;
+    padding: 3px 10px;
+}
+.vote-n-comment button p {
+    margin: 0 5px; 
+    font-size: 14px;
+    color: #333; 
+}
+.vote-n-comment button:hover {
+    background-color: #ff4500;
+    border-color: #ff4500;
+    color: white;
+}
+.vote-n-comment button:active {
+    transform: scale(0.98); 
+}
+.vote-n-comment button:focus {
+    outline: 2px solid #ff4500; 
+}
+.up, .down {
+    width: 13px; 
+    height: 13px;
+    fill: #333; 
+    transition: transform 0.3s ease;
+}
+.vote-n-comment button:hover .up, 
+.vote-n-comment button:hover .down {
+    transform: scale(1.2);
+}
+.vote-n-comment button:focus .up,
+.vote-n-comment button:focus .down {
+    transform: scale(1.1);
+}

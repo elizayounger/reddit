@@ -1,17 +1,45 @@
+/* General Searchbar as a whole */
 .searchbar {
     display: flex;
     background-color: white;
     height: 40px;
     align-items: center;
 }
+.searchbar svg {
+    padding: 10px 0px 10px 10px;
+}
+
+/* SEARCH BAR INPUT */
 .searchbar-input {
     align-content: center;
     position: absolute;
     right: 15px;
+    display: flex;
+    align-items: center;
 }
-svg {
-    padding-left: 10px;
+.searchbar-input input {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 14px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
+@media screen and (min-width: 475px) {
+    .searchbar-input input {
+        width: 200px;
+    }
+}
+.searchbar-input input:focus {
+    border-color: #ff4500;
+    box-shadow: 0 0 5px rgba(255, 69, 0, 0.5);
+    outline: none;
+}
+.searchbar-input input::placeholder {
+    color: #aaa;
+    font-style: italic;
+}
+
+/* SEARCHBAR BUTTON */
 .searchbar button {
     background-color: #ff4500; 
     color: white; 
@@ -32,6 +60,7 @@ svg {
     outline: 2px solid #ff4500;
 }
 
+/* MEDIA QUERIES */
 @media screen and (max-width: 375px) {
     svg {
         padding-left: 0px;
@@ -39,9 +68,15 @@ svg {
     .searchbar {
         padding-left: 10px;
     }
+    .searchbar-input {
+        right: 5px;
+    }
     .reddit-icon {
         height: 35px;
         width: 35px;
+    }
+    svg.reddit-icon {
+        display: none;
     }
 
 }
