@@ -1,0 +1,47 @@
+.searchbar {
+    display: flex;
+    background-color: white;
+    height: 40px;
+    align-items: center;
+}
+.searchbar-input {
+    align-content: center;
+    position: absolute;
+    right: 15px;
+}
+svg {
+    padding-left: 10px;
+}
+.searchbar button {
+    background-color: #ff4500; 
+    color: white; 
+    border: none; 
+    border-radius: 5px;
+    padding: 3px 10px;
+    margin-left: 5px;
+    cursor: pointer; 
+    transition: background-color 0.3s ease;
+}
+.searchbar button:hover {
+    background-color: #e03e00;
+}
+.searchbar button:active {
+    background-color: #c73700;
+}
+.searchbar button:focus {
+    outline: 2px solid #ff4500;
+}
+
+@media screen and (max-width: 375px) {
+    svg {
+        padding-left: 0px;
+    }
+    .searchbar {
+        padding-left: 10px;
+    }
+    .reddit-icon {
+        height: 35px;
+        width: 35px;
+    }
+
+}
