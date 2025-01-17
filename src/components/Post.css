@@ -4,6 +4,7 @@
 }
 .post {
     padding: 0.5rem;
+    padding-bottom: 1rem;
     border: 2px solid #c73700;
     background-color: white;
     border-radius: 1rem;
@@ -18,7 +19,6 @@
 }
 .post-author {
     display: flex;
-    flex-direction: row;
     align-items: center;
     align-content: center;
     text-align: center;
@@ -62,8 +62,10 @@
 /* FOOTER */
 .vote-n-comment {
     display: flex;
+    width: 95%;
     align-items: center;
-    margin-top: 10px;
+    padding-top: 10px;
+    margin: auto;
     justify-content: space-between;
 }
 .vote {

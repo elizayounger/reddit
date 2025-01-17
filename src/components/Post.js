@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Post.css";
 import Comments from "../features/comments/Comments";
 import {ReactComponent as ProfilePic } from "../resources/icons/user-profile-icon.svg";
@@ -9,7 +9,12 @@ import {ReactComponent as CommentIcon } from "../resources/icons/comment-icon-so
 
 export default function Post() {
 
-    const [ isComments, setIsComments ] = useState(true);
+    const [ isComments, setIsComments ] = useState(false);
+    useEffect(() => {
+        if (isComments) {
+            // TODO: dispatch(loadPostComments(postId));
+        }
+    }, [isComments]);
 
     const post = { // TODO: outsource this to redux
         postId: "0123",
@@ -52,7 +57,7 @@ export default function Post() {
                     </button>
                 </div>
 
-                <button className="comment-button">
+                <button className="comment-button" onClick={()=>{setIsComments(!isComments)}}>
                     < CommentIcon className="comment" /> 
                     <p>{post.commentNumber}</p>
                 </button>

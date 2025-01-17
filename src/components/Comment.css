@@ -1,0 +1,28 @@
+/* GENERAL */
+article.comment {
+    margin-bottom: 0.5rem;
+    background-color: #f2eeec;
+    border-radius: 0.2rem;
+    padding: 0.5rem 1rem 0.25rem 0.5rem;
+}
+/* HEADER */
+header.comment-author {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+article.comment .profile-pic {
+    height: 1rem;
+    width: 1rem;
+}
+article.comment p {
+    margin: 0;
+}
+article.comment .prof-name-pic {
+    display: flex;
+    align-items: center;
+}
+/* COMMENT */
+article.comment .comment-txt {
+    padding: 0.5rem 0;
+}
