@@ -1,13 +1,21 @@
-import React, { useState, useEffect } from "react";
+// import modules:
+import React, { useState, useEffect } from "react";  
+import { useDispatch, useSelector } from "react-redux";
 import "./Post.css";
-import Comments from "../features/comments/Comments";
-import {ReactComponent as ProfilePic } from "../resources/icons/user-profile-icon.svg";
-import {ReactComponent as Dot } from "../resources/icons/dot-icon.svg";
-import {ReactComponent as Uparrow } from "../resources/icons/up-arrow-icon.svg";
-import {ReactComponent as Downarrow } from "../resources/icons/down-arrow-icon.svg";
-import {ReactComponent as CommentIcon } from "../resources/icons/comment-icon-soft.svg";
 
-export default function Post() {
+// import redux actions
+import { selectPostViaId } from "../features/newsfeed/NewsfeedSlice";
+
+// imported components:
+import Comments from "../features/comments/Comments";
+import { ReactComponent as ProfilePic } from "../resources/icons/user-profile-icon.svg";
+import { ReactComponent as Dot } from "../resources/icons/dot-icon.svg";
+import { ReactComponent as Uparrow } from "../resources/icons/up-arrow-icon.svg";
+import { ReactComponent as Downarrow } from "../resources/icons/down-arrow-icon.svg";
+import { ReactComponent as CommentIcon } from "../resources/icons/comment-icon-soft.svg";
+
+
+export default function Post({postId}) {
 
     const [ isComments, setIsComments ] = useState(false);
     useEffect(() => {
@@ -16,25 +24,14 @@ export default function Post() {
         }
     }, [isComments]);
 
-    const post = { // TODO: outsource this to redux
-        postId: "0123",
-        authorProfilePic: < ProfilePic className="profile-pic" />,
-        authorName: "Author Profile Name",
-        timePosted: "2 hours", // TODO: calculate time since post
-        picCaption: "Caption for Photograph",
-        picSrc: 'src/resources/post-pic-placeholder.jpg',
-        picAlt: "post-pic-placeholder",
-        upVotes: "4.9k",
-        downVotes: "1.1k",
-        commentNumber: "110"
-    };
-    
-    return(<article className="post-container">
+    const post = useSelector(selectPostViaId(postId));
+        
+    return(<article className="post-container" id={postId}>
 
         <div className="post">
 
             <header className="post-author">
-                {post.authorProfilePic}
+                < ProfilePic className="profile-pic" />
                 <p className="author-profile-name">{post.authorName}</p>
                 < Dot className="dot-icon" />
                 <p className="time-since-post" >{post.timePosted}</p>

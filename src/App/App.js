@@ -3,7 +3,7 @@ import './App.css';
 
 import Searchbar from '../features/searchBar/Searchbar';
 import Post from '../components/Post';
-// import Newsfeed from '../features/newsfeed/Newsfeed';
+import Newsfeed from '../features/newsfeed/Newsfeed';
 // import { createBrowserRouter, createRoutesFromElements, Route, Outlet } from 'react-router-dom';
 
 // const router = createBrowserRouter(createRoutesFromElements(
@@ -14,7 +14,7 @@ function App() {
    return (
       <div className="App">
          < Searchbar /> 
-         < Post />
+         < Newsfeed />
          <header className="App-header">
             <img src={logo} className="App-logo" alt="logo" />
             <p>
