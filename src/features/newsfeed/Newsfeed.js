@@ -15,7 +15,6 @@ export default function Newsfeed() {
     // TODO: dispatch(loadNewsfeed());
 
     const postIds = useSelector(selectPostIds);
-    console.log(`postIds: ${postIds}`);
     
     return (<section className="newsfeed">
         {postIds.map(id => < Post postId={id} />)}

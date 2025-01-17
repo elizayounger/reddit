@@ -18,7 +18,8 @@ const initialState = {
             picAlt: "post-pic-placeholder",
             upVotes: "4.9k",
             downVotes: "1.1k",
-            commentNumber: "110"
+            commentNumber: "110",
+            relatedComments: []
         },
         '4567': {
             authorProfilePic: "",
@@ -29,7 +30,8 @@ const initialState = {
             picAlt: "post-pic-placeholder",
             upVotes: "3.5k",
             downVotes: "800",
-            commentNumber: "95"
+            commentNumber: "95",
+            relatedComments: []
         }
     }
 };
@@ -53,3 +55,4 @@ export const selectPostViaId = (id) => (state) => {
 
 // Exports
 export default newsfeedSlice.reducer;
+// TODO: remember to export the actions when they come

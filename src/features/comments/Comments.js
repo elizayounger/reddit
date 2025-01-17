@@ -1,17 +1,24 @@
+// import modules
 import React from "react";
 import "./Comments.css";
+import { useSelector } from "react-redux";
+
+// import components
 import Comment from "../../components/Comment";
 
+// import slice actions / selectors
+import { selectCommentIds, selectAllComments } from "./CommentsSlice";
+
+
+// ---------------- Component -----------------------
 export default function Comments({postId}) {
-    const comment = {
-        commentId: '0123',
-        name: 'Zulu Masson',
-        timePassed: "2 hours",
-        comment: "you smell"
+
+    const commentIds = useSelector(selectCommentIds(postId));
+    if (!commentIds) {
+        return <p>Be the first to comment!</p>
     }
 
     return (<section className="comments-container">
-        < Comment id={comment.commentId} name={comment.name} timePassed={comment.timePassed} comment={comment.comment} />
-        < Comment id={comment.commentId} name={comment.name} timePassed={comment.timePassed} comment={comment.comment} />
+        { commentIds.map( commentId => < Comment commentId={commentId} /> )}
     </section>)
 }

@@ -27,21 +27,17 @@ export default function Post({postId}) {
     const post = useSelector(selectPostViaId(postId));
         
     return(<article className="post-container" id={postId}>
-
         <div className="post">
-
             <header className="post-author">
                 < ProfilePic className="profile-pic" />
                 <p className="author-profile-name">{post.authorName}</p>
                 < Dot className="dot-icon" />
                 <p className="time-since-post" >{post.timePosted}</p>
             </header>
-
             <figure>
                 <h3>{post.picCaption}</h3>
                 <img src="post-pic-placeholder.jpg" alt={post.picAlt} />
             </figure>
-        
             <footer className="vote-n-comment">
                 <div className="vote">
                     <button className="up-button">
@@ -53,16 +49,14 @@ export default function Post({postId}) {
                         <p>{post.downVotes}</p>
                     </button>
                 </div>
-
                 <button className="comment-button" onClick={()=>{setIsComments(!isComments)}}>
                     < CommentIcon className="comment" /> 
                     <p>{post.commentNumber}</p>
                 </button>
             </footer>
 
-            { isComments && < Comments className="comments-section" postId={post.postId} /> }
+            { isComments && < Comments className="comments-section" postId={postId} /> }
 
         </div>
-
     </article>);
 }
