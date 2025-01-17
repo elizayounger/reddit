@@ -38,6 +38,8 @@
     align-items: center;
     margin: 0px 30px;
     align-content: center;
+    padding-bottom: 20px;
+    border-bottom: 1px solid lightgray;
 }
 .post h3 {
     display: inline-block;
@@ -61,7 +63,7 @@
 .vote-n-comment {
     display: flex;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 10px;
     justify-content: space-between;
 }
 .vote {

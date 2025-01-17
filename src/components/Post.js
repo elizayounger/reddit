@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Post.css";
+import Comments from "../features/comments/Comments";
 import {ReactComponent as ProfilePic } from "../resources/icons/user-profile-icon.svg";
 import {ReactComponent as Dot } from "../resources/icons/dot-icon.svg";
 import {ReactComponent as Uparrow } from "../resources/icons/up-arrow-icon.svg";
@@ -8,7 +9,10 @@ import {ReactComponent as CommentIcon } from "../resources/icons/comment-icon-so
 
 export default function Post() {
 
-    const post = {
+    const [ isComments, setIsComments ] = useState(true);
+
+    const post = { // TODO: outsource this to redux
+        postId: "0123",
         authorProfilePic: < ProfilePic className="profile-pic" />,
         authorName: "Author Profile Name",
         timePosted: "2 hours", // TODO: calculate time since post
@@ -38,11 +42,11 @@ export default function Post() {
         
             <footer className="vote-n-comment">
                 <div className="vote">
-                    <button>
+                    <button className="up-button">
                         < Uparrow className="up" /> 
                         <p>{post.upVotes}</p>
                     </button>
-                    <button>
+                    <button className="down-button">
                         < Downarrow className="down" /> 
                         <p>{post.downVotes}</p>
                     </button>
@@ -52,10 +56,11 @@ export default function Post() {
                     < CommentIcon className="comment" /> 
                     <p>{post.commentNumber}</p>
                 </button>
-
             </footer>
 
+            { isComments && < Comments className="comments-section" postId={post.postId} /> }
+
         </div>
-    
+
     </article>);
 }
