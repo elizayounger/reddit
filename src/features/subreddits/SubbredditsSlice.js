@@ -1,23 +1,23 @@
 // import modules
 import { createSlice } from "@reduxjs/toolkit";
-import { asyncThunkCreator } from "@reduxjs/toolkit";
+import { createAsyncThunk } from "@reduxjs/toolkit";
+// import functions
 import { getSubreddits } from "../../api/redditApi.js"
+import { parseSubreddits } from "../../api/utility.js";
 
 // Async thunkware
 export const loadSubreddits = createAsyncThunk('subreddits/loadSubreddits', async () => {
     const response = await getSubreddits();
+    const parsedResponse = parseSubreddits(response);
+    console.log(`parsedSubreddits: ${parsedResponse}`)
+    return parsedResponse;
 });
 
 // Initial State
 const initialState = {
-
-    display_name: "Home",
-    title: "Home",
-    display_name_prefixed: "r/Home",
-    name: "t5_2qs0k",
-    id: "2qs0k",
-    description: "Everything home related: interior design, home improvement, architecture.\n\n**Related subreddits**\n--------------------------\n* [/r/InteriorDesign](http://www.reddit.com/r/interiordesign)\n* [/r/architecture](http://www.reddit.com/r/architecture)\n* [/r/houseporn](http://www.reddit.com/r/houseporn)\n* [/r/roomporn](http://www.reddit.com/r/roomporn)\n* [/r/designmyroom](http://www.reddit.com/r/designmyroom)",
-    url: "/r/Home/"
+    subreddits: {},
+    isLoading: false,
+    isError: false
 }
 
 // Slice Reducer
@@ -26,7 +26,22 @@ const subbredditsSlice = createSlice({
     initialState: initialState, 
     reducers: {
         // TODO: Add reducers
-    }
+    },
+    extraReducers: (builder) => {
+        builder
+            .addCase(loadSubreddits.pending, (state) => {
+                state.isLoading = true;
+                state.isError = false; // Reset error state on new load
+            })
+            .addCase(loadSubreddits.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.subreddits = action.payload;
+            })
+            .addCase(loadSubreddits.rejected, (state) => {
+                state.isLoading = false;
+                state.isError = true;
+            });
+    },
 });
 
 // Selector

@@ -33,7 +33,9 @@ const initialState = {
             commentNumber: "95",
             relatedComments: []
         }
-    }
+    },
+    isLoading: false,
+    isError: false
 };
 
 // Slice Reducer

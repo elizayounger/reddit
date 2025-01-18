@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 // import componentsimport Comment from "../../components/Comment.js";
 
 // import slice actions / selectors
-import { selectCommentIds, selectAllComments } from "./CommentsSlice";
+import { selectCommentIds, selectAllComments } from "./CommentsSlice.js";
 
 
 // ---------------- Component -----------------------
