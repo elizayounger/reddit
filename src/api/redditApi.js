@@ -1,32 +1,37 @@
 export const API_ROOT = 'https://www.reddit.com';
 
 export const getSubredditPosts = async (subreddit) => {
-  const response = await fetch(`${API_ROOT}${subreddit}.json`);
-  const json = await response.json();
+   const response = await fetch(`${API_ROOT}${subreddit}.json`);
+   const json = await response.json();
 
-  return json.data.children.map((post) => post.data);
+   return json.data.children.map((post) => post.data);
 };
 
-export const getSubreddits = async () => {
-  const response = await fetch(`${API_ROOT}/subreddits.json`);
-  const json = await response.json();
-
-  return json.data.children.map((subreddit) => subreddit.data);
+export const getSubreddits = async () => { // retrieves all the subreddits available from api
+   try {
+      const response = await fetch(`${API_ROOT}/subreddits.json`);
+      if (!response.ok) {
+         throw new Error(`Failed to fetch subreddits: ${response.status} ${response.statusText}`);
+      }
+      const json = await response.json();
+      if (!json.data || !json.data.children) {
+         throw new Error('Invalid response format: Missing expected data structure');
+      }
+      return json.data.children.map((subreddit) => subreddit.data);
+   } catch (error) {
+      console.error('Error fetching subreddits:', error);
+      throw new Error(`Error fetching subreddits: ${error.message}`);
+   }
 };
+
 
 export const getPostComments = async (permalink) => {
-  const response = await fetch(`${API_ROOT}${permalink}.json`);
-  const json = await response.json();
+   const response = await fetch(`${API_ROOT}${permalink}.json`);
+   const json = await response.json();
 
-  return json[1].data.children.map((subreddit) => subreddit.data);
+   return json[1].data.children.map((subreddit) => subreddit.data);
 };
 
-const func = async () => {
-    const response = await getSubreddits();
-    console.log(`response: ${JSON.stringify(response, null, 2)}`);
-};
-
-func();
 // {
     // display_name: "Home",
     // title: "Home",
