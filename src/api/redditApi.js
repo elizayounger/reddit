@@ -8,20 +8,9 @@ export const getSubredditPosts = async (subreddit) => {
 };
 
 export const getSubreddits = async () => { // retrieves all the subreddits available from api
-   try {
-      const response = await fetch(`${API_ROOT}/subreddits.json`);
-      if (!response.ok) {
-         throw new Error(`Failed to fetch subreddits: ${response.status} ${response.statusText}`);
-      }
-      const json = await response.json();
-      if (!json.data || !json.data.children) {
-         throw new Error('Invalid response format: Missing expected data structure');
-      }
-      return json.data.children.map((subreddit) => subreddit.data);
-   } catch (error) {
-      console.error('Error fetching subreddits:', error);
-      throw new Error(`Error fetching subreddits: ${error.message}`);
-   }
+    const response = await fetch(`${API_ROOT}/subreddits.json`);
+    const json = await response.json();
+    return json.data.children.map((subreddit) => subreddit.data);
 };
 
 

@@ -3,7 +3,8 @@ import React from "react";
 import "./Comments.css";
 import { useSelector } from "react-redux";
 
-// import componentsimport Comment from "../../components/Comment.js";
+// import components
+import Comment from "../../components/Comment.js";
 
 // import slice actions / selectors
 import { selectCommentIds, selectAllComments } from "./CommentsSlice.js";

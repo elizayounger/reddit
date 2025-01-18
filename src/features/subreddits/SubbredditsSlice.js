@@ -3,12 +3,12 @@ import { createSlice } from "@reduxjs/toolkit";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 // import functions
 import { getSubreddits } from "../../api/redditApi.js"
-import { parseSubreddits } from "../../api/utility.js";
+import { parseSubredditsToObj } from "../../api/utility.js";
 
 // Async thunkware
 export const loadSubreddits = createAsyncThunk('subreddits/loadSubreddits', async () => {
     const response = await getSubreddits();
-    const parsedResponse = parseSubreddits(response);
+    const parsedResponse = parseSubredditsToObj(response);
     console.log(`parsedSubreddits: ${parsedResponse}`)
     return parsedResponse;
 });
@@ -31,7 +31,7 @@ const subbredditsSlice = createSlice({
         builder
             .addCase(loadSubreddits.pending, (state) => {
                 state.isLoading = true;
-                state.isError = false; // Reset error state on new load
+                state.isError = false; 
             })
             .addCase(loadSubreddits.fulfilled, (state, action) => {
                 state.isLoading = false;
@@ -45,11 +45,11 @@ const subbredditsSlice = createSlice({
 });
 
 // Selector
-export const selectPostIds = state => Object.keys(state.newsfeed.posts);
-export const selectPosts = state => state.newsfeed.posts;
-export const selectPostViaId = (id) => (state) => {
-    return state.newsfeed.posts[id];
+export const selectSubreddits = state => {
+    const subreddits = state.subreddits.subreddits;
+    return Object.keys(subreddits) || [];
 };
 
 // Exports
-export default newsfeedSlice.reducer;
+export default subbredditsSlice.reducer;
+

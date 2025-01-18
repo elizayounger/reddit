@@ -1,4 +1,4 @@
-export function parseSubreddits(subredditsRaw) {
+export function parseSubredditsToObj(subredditsRaw) {
    const parsedSubreddits = {};
    // Map through the raw subreddit data and parse each subreddit
    for (const subreddit of subredditsRaw) {
@@ -7,6 +7,12 @@ export function parseSubreddits(subredditsRaw) {
 
    return parsedSubreddits;
 }
+
+export function parseSubredditsToList(subredditsRaw) {
+    const parsedSubreddits = subredditsRaw.map(subreddit => parseSubreddit(subreddit));
+    
+    return parsedSubreddits;
+ }
   
 function parseSubreddit(subredditRaw) {  
    return {
