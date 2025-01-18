@@ -1,6 +1,6 @@
 import React from "react";
 import "./Comments.css";
-import Comment from "../../components/Comment";
+import Comment from "../../components/Comment.js";
 
 export default function Comments({postId}) {
     const comment = {

@@ -14,8 +14,7 @@ useEffect( async () => {
 
    checkToken(); 
 
-}, []); // TODO: check if dependency correct
-
+}, []);
 // ----------------------- 2. request Authorisation -----------------------
 
 export async function getAuthorisation() {

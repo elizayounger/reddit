@@ -1,0 +1,7 @@
+.subreddit-button {
+    display: flex;
+    align-items: center;
+}
+.subreddit-button h2 {
+    padding-left: 1rem;
+}

@@ -47,7 +47,6 @@ const newsfeedSlice = createSlice({
 export const selectPostIds = state => Object.keys(state.newsfeed.posts);
 export const selectPosts = state => state.newsfeed.posts;
 export const selectPostViaId = (id) => (state) => {
-    console.log(state.newsfeed.posts[id]);
     return state.newsfeed.posts[id];
 };
 

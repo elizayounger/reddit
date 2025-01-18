@@ -4,10 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import "./Post.css";
 
 // import redux actions
-import { selectPostViaId } from "../features/newsfeed/NewsfeedSlice";
+import { selectPostViaId } from "../features/newsfeed/NewsfeedSlice.js";
 
 // imported components:
-import Comments from "../features/comments/Comments";
+import Comments from "../features/comments/Comments.js";
 import { ReactComponent as ProfilePic } from "../resources/icons/user-profile-icon.svg";
 import { ReactComponent as Dot } from "../resources/icons/dot-icon.svg";
 import { ReactComponent as Uparrow } from "../resources/icons/up-arrow-icon.svg";

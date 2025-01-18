@@ -3,8 +3,8 @@ import './Newsfeed.css';
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 
-import Post from "../../components/Post";
-import { selectPostIds } from "./NewsfeedSlice";
+import Post from "../../components/Post.js";
+import { selectPostIds } from "./NewsfeedSlice.js";
 
 // useEffect(() => {
 //     dispatch(loadNewsfeed());

@@ -1,4 +1,5 @@
 section.newsfeed {
     background-color: #e0d7d3;
     padding-bottom: 2rem;
+    min-height: 100vh;
 }
