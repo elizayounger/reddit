@@ -1,14 +1,21 @@
 // import modules
 import React from "react";
 import './Card.css'
+import { useDispatch } from "react-redux";
 
-// import components
+// import local resources
 import { ReactComponent as ProfilePic } from "../resources/icons/user-profile-icon.svg";
+import { changeSelectedSubreddit } from "../features/subreddits/SubredditsSlice.js";
 
 // Component
 export default function Card({displayName, className}) {
+    const dispatch = useDispatch();
 
-    return(<button className={className} key={displayName}>
+    const onClick = () => {    
+        dispatch(changeSelectedSubreddit(displayName));
+    };
+
+    return(<button className={className} key={displayName} onClick={onClick}>
         < ProfilePic />
         <h2>{displayName}</h2>
     </button>)

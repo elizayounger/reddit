@@ -24,7 +24,12 @@ const subredditsSlice = createSlice({
     name: 'subreddits',
     initialState: initialState, 
     reducers: {
-        // TODO: Add reducers
+        changeSelectedSubreddit: (state, action) => {
+            const newSubreddit = action.payload; // eg payload = 'home'
+            if (newSubreddit) {
+                state.selectedSubreddit = newSubreddit;
+            };
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -60,3 +65,4 @@ export const selectIsError = state => state.isError;
 
 // Exports
 export default subredditsSlice.reducer;
+export const { changeSelectedSubreddit } = subredditsSlice.actions;
