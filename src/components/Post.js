@@ -17,14 +17,14 @@ import { ReactComponent as CommentIcon } from "../resources/icons/comment-icon-s
 
 export default function Post({postId}) {
 
+    const post = useSelector(selectPostViaId(postId));
+
     const [ isComments, setIsComments ] = useState(false);
     useEffect(() => {
         if (isComments) {
             // TODO: dispatch(loadPostComments(postId));
         }
     }, [isComments]);
-
-    const post = useSelector(selectPostViaId(postId));
         
     return(<article className="post-container" id={postId}>
         <div className="post">

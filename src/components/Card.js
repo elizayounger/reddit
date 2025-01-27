@@ -8,7 +8,7 @@ import { ReactComponent as ProfilePic } from "../resources/icons/user-profile-ic
 // Component
 export default function Card({displayName}) {
 
-    return(<button className="subreddit-button">
+    return(<button className="subreddit-button" key={displayName}>
         < ProfilePic />
         <h2>{displayName}</h2>
     </button>)

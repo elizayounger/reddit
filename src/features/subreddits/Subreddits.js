@@ -1,31 +1,32 @@
 // import modules
 import React, { useEffect } from "react";
 import "./Subreddits.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 // import components
 import Card from "../../components/Card.js";
 
 // import actions / selectors
-import { loadSubreddits, selectSubreddits } from "./SubbredditsSlice.js"
-
+import { selectSubreddits, getSelectedSubreddit, selectIsLoading, selectIsError } from "./SubredditsSlice.js";
 
 export default function Subreddits() {
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch(loadSubreddits());
-    }, [dispatch]);
-
     const subreddits = useSelector(selectSubreddits);
-
-    const subredditsMock = [
-        "Home",
-        "AskReddit",
-        "NoStupidQuestions"
-    ]
+    const selectedSubreddit = useSelector(getSelectedSubreddit);
+    const isLoading = useSelector(selectIsLoading);
+    const isError = useSelector(selectIsError);
 
     return (<section className="subreddits">
-        {subreddits.map(displayName => < Card displayName={displayName} />)}
-    </section>)
+
+        {isLoading && <p>Loading...</p>}
+        {isError && <p>Error loading subreddits.</p>}
+
+        {subreddits.map(subredditName => {
+            if (subredditName === selectedSubreddit) {
+                return < Card displayName={subredditName} className="selected" />
+            } else {
+                return < Card displayName={subredditName} />
+            }
+        })}
+
+    </section>);
 }

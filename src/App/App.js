@@ -1,5 +1,12 @@
 import logo from '../logo.svg';
 import './App.css';
+import React, { useEffect } from 'react';
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+
+// import local resources
+import { loadSubreddits, getSelectedSubreddit } from "../features/subreddits/SubredditsSlice.js";
+import { loadNewsfeed } from "../features/newsfeed/NewsfeedSlice.js";
 
 // import components/features
 import Searchbar from '../features/searchBar/Searchbar.js';
@@ -12,6 +19,22 @@ import Subreddits from '../features/subreddits/Subreddits.js';
 // ))
 
 function App() {
+   const dispatch = useDispatch();
+   let selectedSubreddit = useSelector(getSelectedSubreddit);
+
+   useEffect(() => { // loads the subreddits on first render
+      dispatch(loadSubreddits());
+   }, [dispatch]);
+
+   useEffect(() => { // loads the subreddit posts for the selected post on first render
+      if (selectedSubreddit) {
+         console.log(`Change in selected subreddit detected, new selected subreddit: ${selectedSubreddit}`);
+         dispatch(loadNewsfeed(selectedSubreddit));
+      }
+   }, [dispatch, selectedSubreddit]); // Runs whenever selectedSubreddit changes
+
+
+      
    return (
       <div className="App">
          < Searchbar /> 

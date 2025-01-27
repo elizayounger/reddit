@@ -3,7 +3,7 @@ import { configureStore } from "@reduxjs/toolkit";
 // import reducers here
 import newsfeedReducer from "../features/newsfeed/NewsfeedSlice.js";
 import commentsReducer from "../features/comments/CommentsSlice.js";
-import subredditsReducer from "../features/subreddits/SubbredditsSlice.js";
+import subredditsReducer from "../features/subreddits/SubredditsSlice.js";
 
 const store = configureStore({
     reducer: {

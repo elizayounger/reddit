@@ -15,7 +15,7 @@ export function parseApiData(type, rawApiData) {
    }
 
    for (const item of rawApiData) { // creating formatting and returning the objects
-      parsedApiData[item[header]] = parseApiObject(item);
+      parsedApiData[item[header]] = parseApiObject(type, item);
    }
    
    return parsedApiData;
