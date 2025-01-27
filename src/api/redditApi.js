@@ -3,7 +3,8 @@ import { parseApiData } from "./utility.js";
 export const API_ROOT = 'https://www.reddit.com';
 
 export const getSubredditPosts = async (subreddit) => {
-   const response = await fetch(`${API_ROOT}${subreddit}.json`);
+   const subredditUrl = '/r/'+subreddit+'/';
+   const response = await fetch(`${API_ROOT}${subredditUrl}.json`);
    const json = await response.json();
    // now parse data
    const jsonParsed = json.data.children.map((post) => post.data);

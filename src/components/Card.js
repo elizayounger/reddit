@@ -6,9 +6,9 @@ import './Card.css'
 import { ReactComponent as ProfilePic } from "../resources/icons/user-profile-icon.svg";
 
 // Component
-export default function Card({displayName}) {
+export default function Card({displayName, className}) {
 
-    return(<button className="subreddit-button" key={displayName}>
+    return(<button className={className} key={displayName}>
         < ProfilePic />
         <h2>{displayName}</h2>
     </button>)

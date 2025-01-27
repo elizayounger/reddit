@@ -16,7 +16,7 @@ const initialState = {
     subreddits: {},
     isLoading: false,
     isError: false,
-    selectedSubreddit: '/r/pics/',
+    selectedSubreddit: 'pics',
 }
 
 // Slice Reducer
@@ -49,6 +49,12 @@ export const selectSubreddits = state => {
     return Object.keys(subreddits) || [];
 };
 export const getSelectedSubreddit = state => state.subreddits.selectedSubreddit;
+export const getSelectedSubredditUrl = state => {
+    const selectedSubreddit = state.subreddits.selectedSubreddit;
+    const url = state.subreddits.subreddits[selectedSubreddit].url;
+    console.log(`url: ${url}`);
+    return url ? url : null;
+};
 export const selectIsLoading = state => state.isLoading;
 export const selectIsError = state => state.isError;
 

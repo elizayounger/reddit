@@ -7,7 +7,6 @@ import { parseApiData } from '../../api/utility.js';
 
 export const loadNewsfeed = createAsyncThunk('newsfeed/loadNewsfeed', async (selectedSubreddit) => {
     const response = await getSubredditPosts(selectedSubreddit);
-    console.log(`parsedSubredditPosts: ${response}`);
     return response;
 });
 
@@ -46,9 +45,7 @@ const newsfeedSlice = createSlice({
 // Selectors
 export const selectPostIds = (state) => {
     const posts = state.newsfeed.posts;
-    console.log(`NewsfeedSlice posts: ${JSON.stringify(posts)}`);
     const postIds = Object.keys(state.newsfeed.posts);
-    console.log(`NewsfeedSlice PostIds: ${postIds}`)
     if (postIds.length > 0) {
         return postIds;
     } else {

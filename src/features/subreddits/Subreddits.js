@@ -11,7 +11,7 @@ import { selectSubreddits, getSelectedSubreddit, selectIsLoading, selectIsError 
 
 export default function Subreddits() {
     const subreddits = useSelector(selectSubreddits);
-    const selectedSubreddit = useSelector(getSelectedSubreddit);
+    const getDisplayName = useSelector(getSelectedSubreddit);
     const isLoading = useSelector(selectIsLoading);
     const isError = useSelector(selectIsError);
 
@@ -21,12 +21,13 @@ export default function Subreddits() {
         {isError && <p>Error loading subreddits.</p>}
 
         {subreddits.map(subredditName => {
-            if (subredditName === selectedSubreddit) {
-                return < Card displayName={subredditName} className="selected" />
+            if (subredditName === getDisplayName) {
+                console.log(`subredditName: ${subredditName} & getDisplayName: ${getDisplayName}`);
+                return < Card displayName={subredditName} className="subreddit-button selected" />
             } else {
-                return < Card displayName={subredditName} />
+                return < Card displayName={subredditName} className="subreddit-button" />
             }
         })}
 
     </section>);
-}
+};

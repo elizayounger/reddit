@@ -11,8 +11,6 @@ export default function Newsfeed() {
     const postIds = useSelector(selectPostIds);
     const isLoading = useSelector(selectIsLoading);
     const isError = useSelector(selectIsError);
-
-    console.log(`postIds: ${postIds}`);
     
     return (<section className="newsfeed">
 

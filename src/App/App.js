@@ -29,7 +29,7 @@ function App() {
    useEffect(() => { // loads the subreddit posts for the selected post on first render
       if (selectedSubreddit) {
          console.log(`Change in selected subreddit detected, new selected subreddit: ${selectedSubreddit}`);
-         dispatch(loadNewsfeed(selectedSubreddit));
+         dispatch(loadNewsfeed(selectedSubreddit)); 
       }
    }, [dispatch, selectedSubreddit]); // Runs whenever selectedSubreddit changes
 
