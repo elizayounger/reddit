@@ -1,18 +1,20 @@
-import React from "react";
+// import modules
+import React, { useEffect } from "react";
 import './Newsfeed.css';
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 
+// import local resources
 import Post from "../../components/Post.js";
-import { selectPostIds } from "./NewsfeedSlice.js";
-
-// useEffect(() => {
-//     dispatch(loadNewsfeed());
-// }, [dispatch]);
+import { selectPostIds, loadNewsfeed, getSelectedSubreddit } from "./NewsfeedSlice.js";
 
 export default function Newsfeed() {
-    // const dipatch = useDispatch();
-    // TODO: dispatch(loadNewsfeed());
+    const dispatch = useDispatch();
+    const selectedSubreddit = useSelector(getSelectedSubreddit);
+    
+    useEffect(() => {
+        dispatch(loadNewsfeed(selectedSubreddit));
+    }, [dispatch, selectedSubreddit]);
 
     const postIds = useSelector(selectPostIds);
     

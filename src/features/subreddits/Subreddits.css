@@ -1,6 +1,13 @@
 .subreddits {
     display: flex;
+    flex: 1;
     flex-direction: column;
     background-color: #e0d7d3;
     min-height: 100vh;
+}
+
+@media screen and (max-width: 700px) {
+    .subreddits {
+        display: none;
+    }
 }

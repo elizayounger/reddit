@@ -30,28 +30,28 @@ export default function Post({postId}) {
         <div className="post">
             <header className="post-author">
                 < ProfilePic className="profile-pic" />
-                <p className="author-profile-name">{post.authorName}</p>
+                <p className="author-profile-name">{post.author}</p>
                 < Dot className="dot-icon" />
-                <p className="time-since-post" >{post.timePosted}</p>
+                <p className="time-since-post" >{post.created}</p>
             </header>
             <figure>
-                <h3>{post.picCaption}</h3>
-                <img src="post-pic-placeholder.jpg" alt={post.picAlt} />
+                <h3>{post.title}</h3>
+                <img src={post.thumbnail} alt={post.title} />
             </figure>
             <footer className="vote-n-comment">
                 <div className="vote">
                     <button className="up-button">
                         < Uparrow className="up" /> 
-                        <p>{post.upVotes}</p>
+                        <p>{post.ups}</p>
                     </button>
                     <button className="down-button">
                         < Downarrow className="down" /> 
-                        <p>{post.downVotes}</p>
+                        <p>{post.downs}</p>
                     </button>
                 </div>
                 <button className="comment-button" onClick={()=>{setIsComments(!isComments)}}>
                     < CommentIcon className="comment" /> 
-                    <p>{post.commentNumber}</p>
+                    <p>{post.num_comments}</p>
                 </button>
             </footer>
 

@@ -16,7 +16,7 @@ function App() {
       <div className="App">
          < Searchbar /> 
          <div className="homepage-split">
-            {/* < Newsfeed /> */}
+            < Newsfeed />
             < Subreddits />
          </div>
          
