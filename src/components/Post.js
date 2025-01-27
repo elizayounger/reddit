@@ -18,6 +18,8 @@ import { ReactComponent as CommentIcon } from "../resources/icons/comment-icon-s
 export default function Post({postId}) {
 
     const post = useSelector(selectPostViaId(postId));
+    const expression = 'https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,}';
+    const regex = new RegExp(expression);
 
     const [ isComments, setIsComments ] = useState(false);
     useEffect(() => {
@@ -36,7 +38,8 @@ export default function Post({postId}) {
             </header>
             <figure>
                 <h3>{post.title}</h3>
-                <img src={post.thumbnail} alt={post.title} />
+                {regex.exec(post.thumbnail) && <img src={post.thumbnail} alt={post.title} />}
+                
             </figure>
             <footer className="vote-n-comment">
                 <div className="vote">
