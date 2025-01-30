@@ -24,12 +24,19 @@ const newsfeedSlice = createSlice({
     initialState: initialState, 
     reducers: {
         addRelatedComments: (state, action) => {
-            const { postName , commentKeys } = action.payload;
-            console.log(`postname: ${postName}, commentsKeys: ${commentKeys}`);
-            if (!state.posts[postName].comments) {
-                state.posts[postName].comments = [];
+            const [[postName, commentIds]] = Object.entries(action.payload);
+            console.log(`postname: ${postName}, commentIds: ${commentIds}`);
+            
+            if (!state.posts[postName]) {
+                // Initialize post entry if missing
+                state.posts[postName] = { related_comments: [] };
             }
-            state.posts[postName].comments.push(...commentKeys);
+
+            const currentComments = state.posts[postName].related_comments;
+            
+            // Combine existing and new commentIds, while removing duplicates
+            const combinedComments = new Set([...currentComments, ...commentIds]);
+            state.posts[postName].related_comments = [...combinedComments]; // Convert Set back to array  
         }
     },
     extraReducers: (builder) => {
