@@ -8,13 +8,12 @@ import { addRelatedComments } from "../newsfeed/NewsfeedSlice.js";
 import { useDispatch } from "react-redux";
 
 // ASYNC THUNKS
-export const loadComments = createAsyncThunk('comments/loadComments', async (permalink) => {
+export const loadComments = createAsyncThunk('comments/loadComments', async (permalink, { dispatch }) => {
     const response = await getPostComments(permalink);
-    // const keys = Object.keys(response);
-    // dispatch comments keys to newsfeed slice
-    // const postName = response[keys[0]].parent_id;
-    // const dispatch = useDispatch();
-    // dispatch(addRelatedComments({[postName]: keys}));
+
+    const keys = Object.keys(response); // dispatch comments keys to newsfeed slice
+    const postName = response[keys[0]].parent_id;
+    dispatch({ type: 'newsfeed/loadNewsfeed', payload: {[postName]: keys} });
 
     return response;
 });
@@ -40,7 +39,7 @@ const commentsSlice = createSlice({
             .addCase(loadComments.fulfilled, (state, action) => {
                 state.isLoading = false;
                 const newComments = action.payload;
-                console.log(`(in commentsSlice) new comments: ${newComments}`)
+                console.log(`(in commentsSlice) new comments: ${JSON.stringify(newComments)}`)
                 state.comments = {...state.comments, ...newComments};
             })
             .addCase(loadComments.rejected, (state) => {

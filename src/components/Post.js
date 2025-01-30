@@ -32,7 +32,7 @@ export default function Post({postId: postName}) {
     useEffect(() => {
         if (isComments) {
             const permalink = post.permalink;
-            dispatch(loadComments(permalink));
+            dispatch(loadComments(permalink, dispatch)); // pass in dispatch so i can dispatch in my async thunk
         }
     }, [isComments, dispatch, post.permalink]); // Added dependencies
     

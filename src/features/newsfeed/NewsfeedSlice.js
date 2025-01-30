@@ -27,16 +27,14 @@ const newsfeedSlice = createSlice({
             const [[postName, commentIds]] = Object.entries(action.payload);
             console.log(`postname: ${postName}, commentIds: ${commentIds}`);
             
-            if (!state.posts[postName]) {
-                // Initialize post entry if missing
+            if (!state.posts[postName].related_comments) { // check if there are already comments for this post? initialise []
                 state.posts[postName] = { related_comments: [] };
             }
-
             const currentComments = state.posts[postName].related_comments;
+            const combinedComments = new Set([...currentComments, ...commentIds]); // Combine existing and new commentIds, while removing duplicates
             
-            // Combine existing and new commentIds, while removing duplicates
-            const combinedComments = new Set([...currentComments, ...commentIds]);
             state.posts[postName].related_comments = [...combinedComments]; // Convert Set back to array  
+            return;
         }
     },
     extraReducers: (builder) => {
