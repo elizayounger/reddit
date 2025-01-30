@@ -5,7 +5,7 @@ import "./Post.css";
 
 // import local resources
 import { selectPostViaId } from "../features/newsfeed/NewsfeedSlice.js";
-import { addComments } from "../features/comments/CommentsSlice.js";
+import { addComments, loadComments } from "../features/comments/CommentsSlice.js";
 import { getPostComments } from "../api/redditApi.js";
 
 // imported components:
@@ -31,18 +31,8 @@ export default function Post({postId: postName}) {
     
     useEffect(() => {
         if (isComments) {
-            const fetchComments = async () => {
-                try {
-                    const response = await getPostComments(post.permalink);
-                    dispatch(addComments(response)); 
-                    const keys = Object.keys(response);
-                    console.log(`keys: ${keys}`);
-                } catch (error) {
-                    console.error("Failed to load comments:", error);
-                }
-            };
-    
-            fetchComments(); // Call the async function
+            const permalink = post.permalink;
+            dispatch(loadComments(permalink));
         }
     }, [isComments, dispatch, post.permalink]); // Added dependencies
     

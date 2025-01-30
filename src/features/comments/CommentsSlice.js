@@ -7,13 +7,10 @@ import { getPostComments } from "../../api/redditApi.js";
 import { addRelatedComments } from "../newsfeed/NewsfeedSlice.js";
 
 // ASYNC THUNKS
-export const loadComments = createAsyncThunk('comments/loadComments', async (requestObj) => {
-    const { permalink, postName } = requestObj;
+export const loadComments = createAsyncThunk('comments/loadComments', async (permalink) => {
     const response = await getPostComments(permalink);
-
     return response;
 });
-// 
 
 // Initial State
 const initialState = {
@@ -26,12 +23,23 @@ const initialState = {
 const commentsSlice = createSlice({
     name: 'comments',
     initialState: initialState, 
-    reducers: {
-        addComments: (state, action) => {
-            const newComments = action.payload;
-            state.comments = {...state.comments, ...newComments};
-        }
-    }
+    reducers: {},
+    extraReducers: (builder) => {
+        builder
+            .addCase(loadComments.pending, (state) => {
+                state.isLoading = true;
+                state.isError = false; 
+            })
+            .addCase(loadComments.fulfilled, (state, action) => {
+                state.isLoading = false;
+                const newComments = action.payload;
+                state.comments = {...state.comments, ...newComments};
+            })
+            .addCase(loadComments.rejected, (state) => {
+                state.isLoading = false;
+                state.isError = true;
+            });
+    },
 });
 
 // Selector
