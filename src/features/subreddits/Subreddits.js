@@ -22,7 +22,6 @@ export default function Subreddits() {
 
         {subreddits.map(subredditName => {
             if (subredditName === getDisplayName) {
-                console.log(`subredditName: ${subredditName} & getDisplayName: ${getDisplayName}`);
                 return < Card displayName={subredditName} className="subreddit-button selected" />
             } else {
                 return < Card displayName={subredditName} className="subreddit-button" />

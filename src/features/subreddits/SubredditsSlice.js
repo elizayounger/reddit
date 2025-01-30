@@ -57,7 +57,6 @@ export const getSelectedSubreddit = state => state.subreddits.selectedSubreddit;
 export const getSelectedSubredditUrl = state => {
     const selectedSubreddit = state.subreddits.selectedSubreddit;
     const url = state.subreddits.subreddits[selectedSubreddit].url;
-    console.log(`url: ${url}`);
     return url ? url : null;
 };
 export const selectIsLoading = state => state.isLoading;

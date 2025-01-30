@@ -3,8 +3,10 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./Post.css";
 
-// import redux actions
+// import local resources
 import { selectPostViaId } from "../features/newsfeed/NewsfeedSlice.js";
+import { addComments } from "../features/comments/CommentsSlice.js";
+import { getPostComments } from "../api/redditApi.js";
 
 // imported components:
 import Comments from "../features/comments/Comments.js";
@@ -14,21 +16,39 @@ import { ReactComponent as Uparrow } from "../resources/icons/up-arrow-icon.svg"
 import { ReactComponent as Downarrow } from "../resources/icons/down-arrow-icon.svg";
 import { ReactComponent as CommentIcon } from "../resources/icons/comment-icon-soft.svg";
 
+export default function Post({postId: postName}) {
 
-export default function Post({postId}) {
+    const post = useSelector(selectPostViaId(postName)); // load in post to render
 
-    const post = useSelector(selectPostViaId(postId));
+    // check if post has image to render
     const expression = 'https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,}';
     const regex = new RegExp(expression);
 
-    const [ isComments, setIsComments ] = useState(false);
+    // ---------- comment loading functionality ----------
+    
+    const dispatch = useDispatch(); 
+    const [isComments, setIsComments] = useState(false);
+    
     useEffect(() => {
         if (isComments) {
-            // TODO: dispatch(loadPostComments(postId));
+            const fetchComments = async () => {
+                try {
+                    const response = await getPostComments(post.permalink);
+                    dispatch(addComments(response)); 
+                    const keys = Object.keys(response);
+                    console.log(`keys: ${keys}`);
+                } catch (error) {
+                    console.error("Failed to load comments:", error);
+                }
+            };
+    
+            fetchComments(); // Call the async function
         }
-    }, [isComments]);
-        
-    return(<article className="post-container" id={postId}>
+    }, [isComments, dispatch, post.permalink]); // Added dependencies
+    
+    
+    // ----------------------- JSX -----------------------
+    return(<article className="post-container" id={postName}>
         <div className="post">
             <header className="post-author">
                 < ProfilePic className="profile-pic" />
@@ -58,7 +78,7 @@ export default function Post({postId}) {
                 </button>
             </footer>
 
-            { isComments && < Comments className="comments-section" postId={postId} /> }
+            { isComments && < Comments className="comments-section" postId={post.name} /> }
 
         </div>
     </article>);

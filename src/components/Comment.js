@@ -1,25 +1,27 @@
 import React from "react";
+import { useSelector } from "react-redux";
+
+// import local resources
 import "./Comment.css";
 import {ReactComponent as ProfilePic } from "../resources/icons/user-profile-icon.svg";
+// IMPORT SELECT COMMENT BY ID SELECTOR 
+import { selectCommentById } from "../features/comments/CommentsSlice.js";
+
 
 export default function Comment({commentId}) {
 
-    const comment = {
-        commentId: '0123',
-        name: 'Zulu Masson',
-        timePassed: "2 hours",
-        comment: "you smell"
-    }
+    // USE SELECTOR TO GET COMMENT'S DATA
+    const comment = useSelector(selectCommentById(commentId));
 
-    return(<article id={commentId} className="comment">
+    return(<article id={comment.name} className="comment">
         <header className="comment-author">
             <div className="prof-name-pic">
                 < ProfilePic className="profile-pic" />
-                <p className="comment-author-name">{comment.name}</p>
+                <p className="comment-author-name">{comment.author}</p>
             </div>
-            <p className="time-since-post" >{comment.timePassed}</p>
+            <p className="time-since-post" >{comment.created}</p>
         </header>
 
-        <p className="comment-txt">{comment.comment}</p>
+        <p className="comment-txt">{comment.body}</p>
     </article>)
 }

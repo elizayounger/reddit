@@ -7,18 +7,27 @@ import { useSelector } from "react-redux";
 import Comment from "../../components/Comment.js";
 
 // import slice actions / selectors
-import { selectCommentIds, selectAllComments } from "./CommentsSlice.js";
+import { selectCommentById, selectMultipleCommentsById } from "./CommentsSlice.js";
+import { selectCommentsForPost } from "../newsfeed/NewsfeedSlice.js";
 
 
 // ---------------- Component -----------------------
 export default function Comments({postId}) {
 
-    const commentIds = useSelector(selectCommentIds(postId));
-    if (!commentIds) {
-        return <p>Be the first to comment!</p>
+    const commentIds = useSelector(selectCommentsForPost(postId)); // get ids for comments
+    const comments = useSelector(selectMultipleCommentsById(commentIds));
+
+    if (!comments) {
+       return <p>Be the first to comment!</p>
     }
+        // use the ids to load the comments themselves
+    
 
     return (<section className="comments-container">
-        { commentIds.map( commentId => < Comment commentId={commentId} /> )}
+       { comments.map( comment => < Comment commentId={comment.name} /> )}
     </section>)
 }
+
+// YOU NEED TO FIX THE ASYNC CALL FROM COMMENTS SLICE BECAUSE
+// IT DOESNT WORK CALLING THE AUTOMATIC UPDATE OF THE NEWSFEED POST COMMENTS LIST
+
