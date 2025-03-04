@@ -7,6 +7,8 @@ import "./Post.css";
 import { selectPostViaId } from "../features/newsfeed/NewsfeedSlice.js";
 import { addComments, loadComments } from "../features/comments/CommentsSlice.js";
 import { getPostComments } from "../api/redditApi.js";
+import { timeSincePost } from "../util/timeStamp.js";
+import { formatNumber } from "../util/formatCommentNumber.js";
 
 // imported components:
 import Comments from "../features/comments/Comments.js";
@@ -44,18 +46,18 @@ export default function Post({postId: postName}) {
                 < ProfilePic className="profile-pic" />
                 <p className="author-profile-name">{post.author}</p>
                 < Dot className="dot-icon" />
-                <p className="time-since-post" >{post.created}</p>
+                <p className="time-since-post" >{timeSincePost(post.created)}</p>
             </header>
             <figure>
                 <h3>{post.title}</h3>
-                {regex.exec(post.thumbnail) && <img src={post.thumbnail} alt={post.title} />}
-                
+                {/* {regex.exec(post.thumbnail) && <img src={post.thumbnail} alt={post.title} />} */}
+                {regex.exec(post.url) && <img src={post.url} alt={post.title} />}
             </figure>
-            <footer className="vote-n-comment">
+            {/* <footer className="vote-n-comment">
                 <div className="vote">
                     <button className="up-button">
                         < Uparrow className="up" /> 
-                        <p>{post.ups}</p>
+                        <p>{formatNumber(post.ups)}</p>
                     </button>
                     <button className="down-button">
                         < Downarrow className="down" /> 
@@ -64,11 +66,11 @@ export default function Post({postId: postName}) {
                 </div>
                 <button className="comment-button" onClick={()=>{setIsComments(!isComments)}}>
                     < CommentIcon className="comment" /> 
-                    <p>{post.num_comments}</p>
+                    <p>{formatNumber(post.num_comments)}</p>
                 </button>
             </footer>
 
-            { isComments && < Comments className="comments-section" postId={post.name} /> }
+            { isComments && < Comments className="comments-section" postId={post.name} /> } */}
 
         </div>
     </article>);
