@@ -50,10 +50,9 @@ export default function Post({postId: postName}) {
             </header>
             <figure>
                 <h3>{post.title}</h3>
-                {/* {regex.exec(post.thumbnail) && <img src={post.thumbnail} alt={post.title} />} */}
                 {regex.exec(post.url) && <img src={post.url} alt={post.title} />}
             </figure>
-            {/* <footer className="vote-n-comment">
+            <footer className="vote-n-comment">
                 <div className="vote">
                     <button className="up-button">
                         < Uparrow className="up" /> 
@@ -70,7 +69,7 @@ export default function Post({postId: postName}) {
                 </button>
             </footer>
 
-            { isComments && < Comments className="comments-section" postId={post.name} /> } */}
+            { isComments && < Comments className="comments-section" postId={post.name} /> }
 
         </div>
     </article>);

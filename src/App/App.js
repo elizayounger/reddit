@@ -36,7 +36,7 @@ function App() {
       
    return (
       <div className="App">
-         {/* < Searchbar />  */}
+         < Searchbar /> 
          <div className="homepage-split">
             < Newsfeed />
             < Subreddits />

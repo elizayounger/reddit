@@ -3,7 +3,6 @@ import { createSlice } from "@reduxjs/toolkit";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 // import local functions
 import { getSubredditPosts } from '../../api/redditApi.js';
-import { parseApiData } from '../../api/utility.js';
 
 export const loadNewsfeed = createAsyncThunk('newsfeed/loadNewsfeed', async (selectedSubreddit) => {
     const response = await getSubredditPosts(selectedSubreddit);
@@ -26,17 +25,19 @@ const newsfeedSlice = createSlice({
         addRelatedComments: (state, action) => {
             const [[postName, commentIds]] = Object.entries(action.payload);
             console.log(`postname: ${postName}, commentIds: ${commentIds}`);
-            
-            if (!state.posts[postName].related_comments) { // check if there are already comments for this post? initialise []
+    
+            // Ensure state.posts[postName] exists before accessing its properties
+            if (!state.posts[postName]) {
                 state.posts[postName] = { related_comments: [] };
             }
-            const currentComments = state.posts[postName].related_comments;
+    
+            const currentComments = state.posts[postName].related_comments || [];
             const combinedComments = new Set([...currentComments, ...commentIds]); // Combine existing and new commentIds, while removing duplicates
-            
+    
             state.posts[postName].related_comments = [...combinedComments]; // Convert Set back to array  
-            return;
         }
     },
+    
     extraReducers: (builder) => {
         builder
             .addCase(loadNewsfeed.pending, (state) => {
@@ -71,7 +72,8 @@ export const selectPostViaId = (id) => (state) => {
 export const selectIsLoading = state => state.newsfeed.isLoading;
 export const selectIsError = state => state.newsfeed.isError;
 export const selectCommentsForPost = (postName) => (state) => {
-    return state.comments.comments[postName]?.comments || [];
+    const comments = state.newsfeed.posts[postName]?.related_comments || [];
+    return comments;
 };
 
 
