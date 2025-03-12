@@ -25,7 +25,7 @@ export default function Comments({postId}) {
     
 
     return (<section className="comments-container">
-       { comments.map( comment => < Comment commentId={comment.name} /> )}
+       { comments.map( comment => < Comment commentId={comment.name} key={comment.name} /> )}
     </section>)
 }
 

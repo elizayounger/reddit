@@ -1,6 +1,7 @@
 // import modules
 import { createSlice } from "@reduxjs/toolkit";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { createSelector } from 'reselect';
 
 // import local
 import { getPostComments } from "../../api/redditApi.js";
@@ -57,8 +58,6 @@ export const selectMultipleCommentsById = (commentIds = []) => (state) => {
     }
     return commentIds.map(commentId => state.comments.comments[commentId]).filter(comment => comment);
 };
-
-
 
 
 // Exports
