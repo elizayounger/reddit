@@ -5,8 +5,7 @@ import "./Post.css";
 
 // import local resources
 import { selectPostViaId } from "../features/newsfeed/NewsfeedSlice.js";
-import { addComments, loadComments } from "../features/comments/CommentsSlice.js";
-import { getPostComments } from "../api/redditApi.js";
+import { loadComments } from "../features/comments/CommentsSlice.js";
 import { timeSincePost } from "../util/timeStamp.js";
 import { formatNumber } from "../util/formatCommentNumber.js";
 
@@ -40,7 +39,7 @@ export default function Post({postId: postName}) {
     
     
     // ----------------------- JSX -----------------------
-    return(<article className="post-container" id={postName}>
+    return(<article className="post-container" key={postName}>
         <div className="post">
             <header className="post-author">
                 < ProfilePic className="profile-pic" />

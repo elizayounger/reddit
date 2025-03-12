@@ -14,7 +14,7 @@ export default function Comment({commentId}) {
     // USE SELECTOR TO GET COMMENT'S DATA
     const comment = useSelector(selectCommentById(commentId));
 
-    return(<article id={comment.name} className="comment">
+    return(<article key={comment.name} className="comment">
         <header className="comment-author">
             <div className="prof-name-pic">
                 < ProfilePic className="profile-pic" />
