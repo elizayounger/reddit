@@ -39,7 +39,7 @@ export default function Post({postId: postName}) {
     
     
     // ----------------------- JSX -----------------------
-    return(<article className="post-container" key={postName}>
+    return(<article className="post-container">
         <div className="post">
             <header className="post-author">
                 < ProfilePic className="profile-pic" />

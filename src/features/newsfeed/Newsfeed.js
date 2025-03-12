@@ -17,6 +17,6 @@ export default function Newsfeed() {
         {isLoading && <p>Loading...</p>}
         {isError && <p>Error loading posts.</p>}
 
-        {postIds.map(id => < Post postId={id} />)}
+        {postIds.map(id => < Post postId={id} key={id}/>)}
     </section>)
 }
