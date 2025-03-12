@@ -2,12 +2,18 @@
 .searchbar {
     display: flex;
     background-color: white;
-    height: 40px;
+    /* height: 40px; */
     align-items: center;
 }
 .searchbar svg {
     padding: 10px 0px 10px 10px;
 }
+@media screen and (min-width: 700px) {
+    .searchbar .menu-icon {
+        display: none;
+    }
+}
+    
 
 /* SEARCH BAR INPUT */
 .searchbar-input {

@@ -1,6 +1,6 @@
 import logo from '../logo.svg';
 import './App.css';
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 
@@ -12,11 +12,6 @@ import { loadNewsfeed } from "../features/newsfeed/NewsfeedSlice.js";
 import Searchbar from '../features/searchBar/Searchbar.js';
 import Newsfeed from '../features/newsfeed/Newsfeed.js';
 import Subreddits from '../features/subreddits/Subreddits.js';
-// import { createBrowserRouter, createRoutesFromElements, Route, Outlet } from 'react-router-dom';
-
-// const router = createBrowserRouter(createRoutesFromElements(
-//    <Route path="/" element={< Home />} />
-// ))
 
 function App() {
    const dispatch = useDispatch();
@@ -30,13 +25,19 @@ function App() {
       if (selectedSubreddit) {
          dispatch(loadNewsfeed(selectedSubreddit)); 
       }
-   }, [dispatch, selectedSubreddit]); // Runs whenever selectedSubreddit changes
+   }, [dispatch, selectedSubreddit]); // Runs whenever selectedSubreddit changes and makes sure dispatch is ready
 
 
+   const [mobileNav, setMobileNav] = useState(false);
       
    return (
       <div className="App">
-         < Searchbar /> 
+         < Searchbar setMobileNav={setMobileNav} /> 
+
+         <div className="mobile-nav" style={{ display: mobileNav ? "block" : "none" }}>
+            < Subreddits />
+         </div>
+
          <div className="homepage-split">
             < Newsfeed />
             < Subreddits />
