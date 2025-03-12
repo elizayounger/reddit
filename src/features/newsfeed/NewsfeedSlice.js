@@ -1,6 +1,7 @@
 // import modules
 import { createSlice } from "@reduxjs/toolkit";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { createSelector } from 'reselect';
 // import local functions
 import { getSubredditPosts } from '../../api/redditApi.js';
 
@@ -55,29 +56,36 @@ const newsfeedSlice = createSlice({
     },
 });
 
-// Selectors
-export const selectPostIds = (state) => {
-    const posts = state.newsfeed.posts;
-    const postIds = Object.keys(state.newsfeed.posts);
-    if (postIds.length > 0) {
-        return postIds;
-    } else {
-        return [];
-    }
-};
-export const selectPosts = state => state.newsfeed.posts;
-export const selectPostViaId = (id) => (state) => {
-    return state.newsfeed.posts[id];
-};
-export const selectIsLoading = state => state.newsfeed.isLoading;
-export const selectIsError = state => state.newsfeed.isError;
-export const selectCommentsForPost = (postName) => (state) => {
-    const comments = state.newsfeed.posts[postName]?.related_comments || [];
-    return comments;
-};
 
+// Selectors
+const selectPostsBase = (state) => state.newsfeed.posts;
+
+export const selectPostIds = createSelector(
+    [selectPostsBase],
+    (posts) => {
+        const postIds = Object.keys(posts);
+        return postIds.length > 0 ? postIds : [];
+    }
+);
+
+export const selectPosts = createSelector(
+    [selectPostsBase],
+    (posts) => posts
+);
+
+export const selectPostViaId = (id) => createSelector(
+    [selectPostsBase],
+    (posts) => posts[id]
+);
+
+export const selectIsLoading = (state) => state.newsfeed.isLoading;
+export const selectIsError = (state) => state.newsfeed.isError;
+
+export const selectCommentsForPost = (postName) => createSelector(
+    [selectPostsBase],
+    (posts) => posts[postName]?.related_comments || []
+);
 
 // Exports
 export default newsfeedSlice.reducer;
 export const { addRelatedComments } = newsfeedSlice.actions;
-// TODO: remember to export the actions when they come
