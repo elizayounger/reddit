@@ -5,13 +5,13 @@ import { createSlice } from "@reduxjs/toolkit";
 
 // Initial State
 const initialState = {
-    search: [],
+    searchQuery: [],
     isLoading: false,
     isError: false,
 };
 
 // Slice Reducer
-const newsfeedSlice = createSlice({
+const searchSlice = createSlice({
     name: 'search',
     initialState: initialState, 
     reducers: {},
@@ -22,5 +22,5 @@ const newsfeedSlice = createSlice({
 
 
 // Exports
-export default search.reducer;
+export default searchSlice.reducer;
 // export const { < actions Here > } = searchBar.actions;

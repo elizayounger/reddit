@@ -4,7 +4,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import newsfeedReducer from "../features/newsfeed/NewsfeedSlice.js";
 import commentsReducer from "../features/comments/CommentsSlice.js";
 import subredditsReducer from "../features/subreddits/SubredditsSlice.js";
-import searchReducer from "../features/subreddits/SubredditsSlice.js";
+import searchReducer from "../features/searchBar/SearchBarSlice.js";
 
 const store = configureStore({
     reducer: {
