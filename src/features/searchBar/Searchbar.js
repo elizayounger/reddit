@@ -8,9 +8,9 @@ export default function Searchbar({setMobileNav}) {
         < RedditIcon className="reddit-icon" /> 
         < MenuIcon className="menu-icon" onClick={() => setMobileNav(prev => !prev)} /> 
         
-        <form className="searchbar-input">
+        {/* <form className="searchbar-input">
             <input type="search" placeholder="search"/>
             <button type="search">Submit</button>
-        </form>
+        </form> */}
     </div>)
 }

@@ -5,7 +5,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 // Initial State
 const initialState = {
-    searchQuery: [],
+    searchQuery: '',
     isLoading: false,
     isError: false,
 };
@@ -14,12 +14,16 @@ const initialState = {
 const searchSlice = createSlice({
     name: 'search',
     initialState: initialState, 
-    reducers: {},
+    reducers: {
+        setSearchTerm: (state, action) => {
+            state.searchQuery = action.payload;
+        }
+    },
 });
 
 
 // Selectors
-
+export const selectSearchQuery = (state) => state.searchQuery;
 
 // Exports
 export default searchSlice.reducer;
