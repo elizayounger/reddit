@@ -35,7 +35,7 @@ function App() {
          < Searchbar setMobileNav={setMobileNav} /> 
 
          <div className="mobile-nav" style={{ display: mobileNav ? "block" : "none" }}>
-            < Subreddits />
+            < Subreddits setMobileNav={setMobileNav} />
          </div>
 
          <div className="homepage-split">
