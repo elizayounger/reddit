@@ -14,13 +14,9 @@ import { selectCommentsForPost } from "../newsfeed/NewsfeedSlice.js";
 // ---------------- Component -----------------------
 export default function Comments({postId}) {
 
-    console.log(`in Comments.js. postId: ${postId}. type: ${typeof postId}`);
-
     const commentIds = useSelector(selectCommentsForPost(postId)); // get ids for comments
-    console.log(`(in comments.js) commendIds: ${commentIds.join(", ")}`);
 
     const comments = useSelector(selectMultipleCommentsById(commentIds));
-    console.log(`comments: ${JSON.stringify(comments)}`);
 
     if (comments.length ===  0) {
        return <p>Be the first to comment!</p>
