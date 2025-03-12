@@ -49,16 +49,23 @@ const subredditsSlice = createSlice({
 });
 
 // Selectors
-export const selectSubreddits = state => {
-    const subreddits = state.subreddits.subreddits;
-    return Object.keys(subreddits) || [];
-};
+export const selectSubreddits = createSelector(
+    state => state.subreddits.subreddits,
+    (subreddits) => Object.keys(subreddits) || []
+);
+
 export const getSelectedSubreddit = state => state.subreddits.selectedSubreddit;
-export const getSelectedSubredditUrl = state => {
-    const selectedSubreddit = state.subreddits.selectedSubreddit;
-    const url = state.subreddits.subreddits[selectedSubreddit].url;
-    return url ? url : null;
-};
+
+export const getSelectedSubredditUrl = createSelector(
+  state => state.subreddits.selectedSubreddit,         // Input selector 1: selectedSubreddit
+  state => state.subreddits.subreddits,                // Input selector 2: subreddits object
+  (selectedSubreddit, subreddits) => {
+    // Result function: Compute the URL from the selected subreddit
+    const url = subreddits[selectedSubreddit]?.url;
+    return url ? url : null;  // Return the URL or null if not found
+  }
+);
+
 export const selectIsLoading = state => state.isLoading;
 export const selectIsError = state => state.isError;
 
