@@ -25,7 +25,6 @@ const newsfeedSlice = createSlice({
     reducers: {
         addRelatedComments: (state, action) => {
             const [[postName, commentIds]] = Object.entries(action.payload);
-            console.log(`postname: ${postName}, commentIds: ${commentIds}`);
     
             // Ensure state.posts[postName] exists before accessing its properties
             if (!state.posts[postName]) {
