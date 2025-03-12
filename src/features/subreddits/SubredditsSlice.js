@@ -1,9 +1,9 @@
 // import modules
 import { createSlice } from "@reduxjs/toolkit";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { createSelector } from 'reselect';
 // import functions
 import { getSubreddits } from "../../api/redditApi.js"
-import { parseApiData } from "../../api/utility.js";
 
 // Async thunkware
 export const loadSubreddits = createAsyncThunk('subreddits/loadSubreddits', async () => {
